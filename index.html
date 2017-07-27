@@ -1,12 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    *cough*
-</body>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <script>
+            var life=100;
+            var gold=0;
+            var numberDefeated=0;
+
+function updateStat(){
+    $('#stats').text("HP: " + life + " //Gold: " + gold + " //DEAD:" + numberDefeated);
+}
+
+
+function attack(){
+    //when the player is alive this condition runs
+    if(life > 0){
+        if(Math.random()*100 >gold){
+            gold=gold + 10;
+            numberDefeated++;
+            $("#ogres").prepend(
+               "<p style =color:red> You won 10 gold! </p>"
+            
+            );
+        }else{
+            gold--;
+            life--;
+            $('#ogres').prepend(
+                "<p style= color:blue> You lost! </p>"
+            );
+}
+        updateStat();
+        makeOgre();
+        
+    }else{
+        $("#ogres").prepend(
+            "<h1 style =color:black> Game Over! </h1>"
+        )
+        $("#ogres").prepend(
+            "<img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcbwcb_2pvtScn1MHrSfDjqhsS7S5bPb5jmPRVBs_Fl7FfHHQV'>"
+        )
+        $("#ogres").prepend(
+            "<h3> Ayinde says 'haha, you lost!'</h3>"
+        )
+       
+    }
+    
+}
+
+function makeOgre(){
+    $('#ogres').prepend(
+        "<img src = 'http://media.istockphoto.com/photos/ice-cream-cone-with-three-different-scoops-of-ice-cream-picture-id477742240?s=170x170' >"
+    );
+}
+function setup(){
+
+ 
+ $("body").append(
+        "<h1> Welcome to Ogre Fighter</h1>"
+    );
+// Can manipulate stats section of the site
+$("body").append(
+    "<div><h3> STATS <p id ='stats'></p></h3></div>"
+);
+
+
+//Attack Button
+$("body").append(
+    "<button onClick='attack()'> ATTACK the OGRE! </button>"
+);
+
+//container for the ogre pictures
+$("body").append(
+    "<div id ='ogres'></div>"
+);
+
+
+
+}
+
+$(document).ready(setup);
+</script>
+      
+    </head>
+    <title>Game</title>
+    <body> 
+        
+    </body>
 </html>
